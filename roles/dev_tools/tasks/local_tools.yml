@@ -1,0 +1,14 @@
+---
+- name: Install tools to help development
+  win_chocolatey:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - visualstudio2019community
+    - filezilla  
+    - git
+    - python3
+    - microsoft-windows-terminal
+    - sublimetext3
+    - postman
+  ignore_errors: yes
