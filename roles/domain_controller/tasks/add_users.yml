@@ -1,0 +1,14 @@
+---
+#Create Domain Admin users contained in domainusers.yml file
+- name: Add Windows Sysadmins to Domain Admins group
+  win_domain_user:
+    name: "{{item.name}}"
+    firstname: "{{item.firstname}}"
+    surname: "{{item.surname}}"
+    password: "{{default_pass}}"
+    password_expired: yes
+    update_password: on_create
+    state: present
+    groups:
+      - Domain Admins
+  with_items: '{{domainusers}}'

@@ -1,0 +1,9 @@
+---
+  domainusers:
+  - name: jdoe
+    firstname: John
+    surname: Doe
+      
+  - name: bdawg
+    firstname: Bee
+    surname: Dawg
