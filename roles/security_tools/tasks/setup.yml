@@ -1,0 +1,5 @@
+---
+- name: Create Tools folder
+  win_file:
+    path: C:\Tools\ADCS_Exploitation\
+    state: directory
