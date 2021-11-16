@@ -5,6 +5,11 @@
     state: present
   loop:
     - visualstudio2019community
+    - sysinternals
+    - procexp
+    - procmon
+    - dnspy
+    - ghidra
     - filezilla  
     - git
     - python3
