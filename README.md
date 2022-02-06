@@ -51,6 +51,11 @@ $file = "$env:temp\ConfigureRemote.ps1"
 
 powershell.exe -ExecutionPolicy ByPass -File $file
 ```
+To view the current listeners that are running on the WinRM service, run the following command:
+```powershell
+winrm enumerate winrm/config/Listener
+```
+
 
 ## Tools to Add
 - MSOLSpray
