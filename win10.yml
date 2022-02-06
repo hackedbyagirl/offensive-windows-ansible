@@ -1,0 +1,6 @@
+# Main Playbook
+---
+- name: Offensive Windows Setup
+  hosts: windows
+  roles:
+    - windows
