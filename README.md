@@ -15,7 +15,10 @@ Example of how to run this script
 # Make sure you're able to run the script in powershell
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 
-# Upgrade to powershell 5.1 with automatic login and reboots
+# Upgrade to powershell 5.1 with automatic login and reboots using powershell
+.\Upgrade-Powershell.ps1 -version 5.1 -username "Username" -password "Password"
+
+# Using Command Prompt
 powershell.exe -ExecutionPolicy Bypass -File Upgrade-Powershell.ps1 -version 5.1 -username "Username" -password "Password"
 ```
 Once completed, you will need to remove auto login and set the execution policy back to the default `Restricted `` for Windows clients, or ``RemoteSigned` for Windows servers). You can do this with the following PowerShell commands:
