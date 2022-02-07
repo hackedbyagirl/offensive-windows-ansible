@@ -40,6 +40,10 @@ Once Powershell has been upgraded to at least version 3.0, the final step is for
 This script sets up both HTTP and HTTPs listeners with a self-signed cert and enables `Basic` authentication option on the service. 
 
 ```powershell
+# From local PowerShell
+.\ConfigureRemote.ps1
+
+# From download
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $url = "https://github.com/hackedbyagirl/offensive-windows-ansible/blob/main/scripts/ConfigureRemote.ps1"
 $file = "$env:temp\ConfigureRemote.ps1"
@@ -52,7 +56,10 @@ To view the current listeners that are running on the WinRM service, run the fol
 ```powershell
 winrm enumerate winrm/config/Listener
 ```
-
+After done running ansible, it is important to disable WinRM. To do so, run the following script.
+```powershell
+.\DisableWinRM.ps1
+```
 
 ## Tools to Add
 - MSOLSpray
