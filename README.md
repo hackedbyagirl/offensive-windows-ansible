@@ -7,22 +7,16 @@ For Ansible to communicate to a Windows host and use Windows modules, the Window
 - A WinRM listener should be created and activated. More details for this can be found below.
 
 ### Upgrading PowerShell and .NET Framework
-The base image of windows does not meet the requirements to run ansible, therefore, PowerShell and .NET must be upgraded.This can be done by running the following script. `Upgrade-PoweerShell.ps1`
-
+The base image of windows does not meet the requirements to run ansible, therefore, PowerShell and .NET must be upgraded. This can be done by running the following script. `Upgrade-PoweerShell.ps1` that is located in the `scripts` folder.
+ 
 Example of how to run this script
 
 ```powershell
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$url = https://github.com/hackedbyagirl/offensive-windows-ansible/blob/main/scripts/Upgrade-PowerShell.ps1
-$file = "$env:temp\Upgrade-PowerShell.ps1"
-$username = "Administrator"
-$password = "Password"
-
-(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+# Make sure you're able to run the script in powershell
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 
-# Version can be 3.0, 4.0 or 5.1
-&$file -Version 5.1 -Username $username -Password $password -Verbose
+# Upgrade to powershell 5.1 with automatic login and reboots
+powershell.exe -ExecutionPolicy Bypass -File Upgrade-Powershell.ps1 -version 5.1 -username "Username" -password "Password"
 ```
 Once completed, you will need to remove auto login and set the execution policy back to the default `Restricted `` for Windows clients, or ``RemoteSigned` for Windows servers). You can do this with the following PowerShell commands:
 
