@@ -1,14 +1,23 @@
-# offensive-windows-ansible
-Ansible playbook to set up an offensive windows workstation
+# Offensive Windows Ansible
 
-## Pre-Requisites
+## Table of Contents
++ [Description](#description)
++ [Getting Started](#getting_started)
+  + [Upgrading PowerShell and .NET Framework](#upgrade_PS)
+  + [Setup WinRM](#setup_winrm)
++ [Features to Add](#features)
+
+## Description <a name = "description"></a>
+An ansible playbook to setup and configure Windows 10 Machines for Offensive Engagements. 
+
+## Getting Started <a name = "getting_started"></a>
 For Ansible to communicate to a Windows host and use Windows modules, the Windows host must meet these requirements:
-- Ansible requires PowerShell 3.0 or newer and at least .NET 4.0 to be installed on the Windows host.
-- A WinRM listener should be created and activated. More details for this can be found below.
+- PowerShell 3.0 or newer and at least .NET 4.0 to be installed on the Windows host.
+- A WinRM listener that should be created and activated. More details for this can be found below.
 
-### Upgrading PowerShell and .NET Framework
+### Upgrading PowerShell and .NET Framework <a name = "upgrade_PS"></a>
 The base image of windows does not meet the requirements to run ansible, therefore, PowerShell and .NET must be upgraded. This can be done by running the following script. `Upgrade-PoweerShell.ps1` that is located in the `scripts` folder.
- 
+
 Example of how to run this script
 
 ```powershell
@@ -17,6 +26,7 @@ Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 
 # Upgrade to powershell 5.1 with automatic login and reboots using powershell
 .\Upgrade-Powershell.ps1 -version 5.1 -username "Username" -password "Password"
+
 
 # Using Command Prompt
 powershell.exe -ExecutionPolicy Bypass -File Upgrade-Powershell.ps1 -version 5.1 -username "Username" -password "Password"
@@ -34,10 +44,10 @@ Remove-ItemProperty -Path $reg_winlogon_path -Name DefaultPassword -ErrorAction 
 ```
 The script works by checking to see what programs need to be installed (such as .NET Framework 4.5.2) and what PowerShell version is required. If a reboot is required and the username and password parameters are set, the script will automatically reboot and logon when it comes back up from the reboot. The script will continue until no more actions are required and the PowerShell version matches the target version. If the username and password parameters are not set, the script will prompt the user to manually reboot and logon when required. When the user is next logged in, the script will continue where it left off and the process continues until no more actions are required.
 
-### WinRM Setup
+### Setup WinRM <a name = "setup_winrm"></a>
 Once Powershell has been upgraded to at least version 3.0, the final step is for the WinRM service to be configured so that Ansible can connect to it. There are two main components of the WinRM service that governs how Ansible can interface with the Windows host: the listener and the service configuration settings.
 
-This script sets up both HTTP and HTTPs listeners with a self-signed cert and enables `Basic` authentication option on the service. 
+This script sets up both HTTP and HTTPs listeners with a self-signed cert and enables `Basic` authentication option on the service.
 
 ```powershell
 # From local PowerShell
@@ -61,8 +71,10 @@ After done running ansible, it is important to disable WinRM. To do so, run the 
 .\DisableWinRM.ps1
 ```
 
-## Tools to Add
+## Features to Add <a name = "features"></a>
 - MSOLSpray
 - Rubeus
 - Microburst
 - RedTeamPowerShellScripts
+
+
